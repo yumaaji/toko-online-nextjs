@@ -39,13 +39,25 @@
       color: white;
       border: none;
       cursor: pointer;
-      margin-bottom: 50px;
+      margin-bottom: 10px;
     }
     &__link{
       text-align: center;
       a{
         color: #23bebe;
       }
+    }
+    &__divider{
+      margin-bottom: 10px;
+    }
+    &__google{
+      background-color: #23bebe;
+      width: 100%;
+      padding: 10px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 50px;
     }
   }
   &__error{

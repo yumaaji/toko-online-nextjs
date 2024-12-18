@@ -10,7 +10,7 @@ const LoginView = () => {
   const [error, setError] = useState("");
 
   const {push, query} = useRouter();
-  const callBackUrl: any = query.callBackUrl || '/'
+  const callbackUrl: any = query.callbackUrl || '/'
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,13 +32,13 @@ const LoginView = () => {
         redirect: false,
         email: form.email.value,
         password: form.password.value,
-        callBackUrl
+        callbackUrl
       })
       console.log(res)
       if(!res?.error){
         setIsLoading(false)
         form.reset()
-        push(callBackUrl)
+        push(callbackUrl)
       }else{
         setIsLoading(false)
         setError("Email or password is incorrect")
@@ -63,8 +63,12 @@ const LoginView = () => {
             <input name='password' id='password' type="password" className={style.login__form__item__input}/>
           </div>
           <button type='submit' className={style.login__form__button}>{isLoading ? "Loading..." : "Login"}</button>
-          <p className={style.login__form__link}>Don{"'"}t have an account? <Link href="/auth/register">Sign Up</Link></p>
         </form>
+        <hr className={style.login__form__divider}/>
+        <div>
+          <button type='button' className={style.login__form__google} onClick={() => signIn("google", {callbackUrl, redirect: false})}>Login with Google</button>
+          <p className={style.login__form__link}>Don{"'"}t have an account? <Link href="/auth/register">Sign Up</Link></p>
+        </div>
       </div>
     </div>
   )
