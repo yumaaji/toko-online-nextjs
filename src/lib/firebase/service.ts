@@ -1,4 +1,3 @@
-import { id } from './../../../node_modules/next-auth/client/__tests__/helpers/mocks.d';
 import {addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where} from 'firebase/firestore'
 import firebaseApp from './init'
 import bcrypt from 'bcrypt'
