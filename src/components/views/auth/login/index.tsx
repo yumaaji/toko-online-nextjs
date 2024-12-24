@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import { redirect } from 'next/dist/server/api-utils';
 import { signIn } from 'next-auth/react';
+import Input from '@/components/ui/Input/Index';
+import Button from '@/components/ui/Button/Index';
 
 const LoginView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -54,19 +56,13 @@ const LoginView = () => {
       {error && <p className={style.login__error}>{error}</p>}
       <div  className={style.login__form}>
         <form onSubmit={handleSubmit}>
-          <div className={style.login__form__item}>
-            <label htmlFor="email">Email</label>
-            <input name='email' id='email' type="email" className={style.login__form__item__input}/>
-          </div>
-          <div className={style.login__form__item}>
-            <label htmlFor="password">Password</label>
-            <input name='password' id='password' type="password" className={style.login__form__item__input}/>
-          </div>
-          <button type='submit' className={style.login__form__button}>{isLoading ? "Loading..." : "Login"}</button>
+          <Input label="Email" type="email" name="email"/>
+          <Input label="Password" type="password" name="password"/>
+          <Button type='submit' className={style.login__form__button}>{isLoading ? "Loading..." : "Login"}</Button>
         </form>
         <hr className={style.login__form__divider}/>
         <div>
-          <button type='button' className={style.login__form__google} onClick={() => signIn("google", {callbackUrl, redirect: false})}>Login with Google</button>
+          <Button type='button' onClick={() => signIn("google", {callbackUrl, redirect: false})} className={style.login__form__google}>Login with Google</Button>
           <p className={style.login__form__link}>Don{"'"}t have an account? <Link href="/auth/register">Sign Up</Link></p>
         </div>
       </div>

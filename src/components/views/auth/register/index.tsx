@@ -2,6 +2,8 @@ import { FormEvent, useState } from 'react';
 import style from './Register.module.scss'
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import Input from '@/components/ui/Input/Index';
+import Button from '@/components/ui/Button/Index';
 
 const RegisterView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,23 +54,11 @@ const RegisterView = () => {
       {error && <p className={style.register__error}>{error}</p>}
       <div  className={style.register__form}>
         <form onSubmit={handleSubmit}>
-          <div className={style.register__form__item}>
-            <label htmlFor="email">Email</label>
-            <input name='email' id='email' type="email" className={style.register__form__item__input}/>
-          </div>
-          <div className={style.register__form__item}>
-            <label htmlFor="fullname">Fullname</label>
-            <input name='fullname' id='fullname' type="text" className={style.register__form__item__input}/>
-          </div>
-          <div className={style.register__form__item}>
-            <label htmlFor="phone">Phone</label>
-            <input name='phone' id='phone' type="text" className={style.register__form__item__input}/>
-          </div>
-          <div className={style.register__form__item}>
-            <label htmlFor="password">Password</label>
-            <input name='password' id='password' type="password" className={style.register__form__item__input}/>
-          </div>
-          <button type='submit' className={style.register__form__button}>{isLoading ? "Loading..." : "Register"}</button>
+          <Input label='Email' type='email' name='email'></Input>
+          <Input label='Fullname' type='email' name='fullname'></Input>
+          <Input label='Phone' type='text' name='phone'></Input>
+          <Input label='Password' type='password' name='password'></Input>
+          <Button type='submit' className={style.register__form__button}>{isLoading ? "Loading..." : "Register"}</Button>
           <p className={style.register__form__link}>Already have an account? <Link href="/auth/login">Sign in</Link></p>
         </form>
       </div>
