@@ -1,11 +1,10 @@
-import { FormEvent, useState } from 'react';
 import style from './Login.module.scss'
-import Link from "next/link";
+import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
-import { redirect } from 'next/dist/server/api-utils';
 import { signIn } from 'next-auth/react';
 import Input from '@/components/ui/Input/Index';
 import Button from '@/components/ui/Button/Index';
+import AuthLayout from '@/components/layouts/AuthLayout';
 
 const LoginView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -51,22 +50,17 @@ const LoginView = () => {
     }
   } 
   return (
-    <div className={style.login}>
-      <h1 className={style.login__title}>login</h1>
-      {error && <p className={style.login__error}>{error}</p>}
-      <div  className={style.login__form}>
-        <form onSubmit={handleSubmit}>
-          <Input label="Email" type="email" name="email"/>
-          <Input label="Password" type="password" name="password"/>
-          <Button type='submit' className={style.login__form__button}>{isLoading ? "Loading..." : "Login"}</Button>
-        </form>
-        <hr className={style.login__form__divider}/>
-        <div>
-          <Button type='button' onClick={() => signIn("google", {callbackUrl, redirect: false})} className={style.login__form__google}>Login with Google</Button>
-          <p className={style.login__form__link}>Don{"'"}t have an account? <Link href="/auth/register">Sign Up</Link></p>
-        </div>
+    <AuthLayout error={error} title='Login' linkText="Don't have an account? " link="/auth/register">
+      <form onSubmit={handleSubmit}>
+        <Input label="Email" type="email" name="email"/>
+        <Input label="Password" type="password" name="password"/>
+        <Button type='submit' className={style.login__button}>{isLoading ? "Loading..." : "Login"}</Button>
+      </form>
+      <hr className={style.login__divider}/>
+      <div>
+        <Button type='button' onClick={() => signIn("google", {callbackUrl, redirect: false})} className={style.login__google}>Login with Google</Button>
       </div>
-    </div>
+    </AuthLayout>
   )
 }
 

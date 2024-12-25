@@ -1,9 +1,10 @@
-import { FormEvent, useState } from 'react';
 import style from './Register.module.scss'
-import Link from "next/link";
+import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import Input from '@/components/ui/Input/Index';
 import Button from '@/components/ui/Button/Index';
+import authServices from '@/services/auth';
+import AuthLayout from '@/components/layouts/AuthLayout';
 
 const RegisterView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,39 +31,31 @@ const RegisterView = () => {
     }
 
     // send to api
-    const result = await fetch("/api/user/register", {
-      method: "POST",
-      headers:{
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-    const response = await result.json()
-    // handle response
-    if(result.status === 200){
-      setIsLoading(false)
-      form.reset()
-      push('/auth/login')
-    }else{
-      setIsLoading(false)
-      setError(response.message || "Email telah terdaftar")
+    try{
+      const result = await authServices.registerAccount(data)
+      if(result.status === 200){
+        setIsLoading(false)
+        form.reset()
+        push('/auth/login')
+      }
+    }catch(error: any){
+      if(error.response && error.response.status === 400){
+        setIsLoading(false)
+        setError("Email already exists")
+      }
     }
+
   } 
   return (
-    <div className={style.register}>
-      <h1 className={style.register__title}>Register</h1>
-      {error && <p className={style.register__error}>{error}</p>}
-      <div  className={style.register__form}>
-        <form onSubmit={handleSubmit}>
-          <Input label='Email' type='email' name='email'></Input>
-          <Input label='Fullname' type='email' name='fullname'></Input>
-          <Input label='Phone' type='text' name='phone'></Input>
-          <Input label='Password' type='password' name='password'></Input>
-          <Button type='submit' className={style.register__form__button}>{isLoading ? "Loading..." : "Register"}</Button>
-          <p className={style.register__form__link}>Already have an account? <Link href="/auth/login">Sign in</Link></p>
-        </form>
-      </div>
-    </div>
+    <AuthLayout error={error} title="Register" linkText="Already have an account, sign in " link="/auth/login">
+      <form onSubmit={handleSubmit}>
+        <Input label='Email' type='email' name='email'></Input>
+        <Input label='Fullname' type='email' name='fullname'></Input>
+        <Input label='Phone' type='text' name='phone'></Input>
+        <Input label='Password' type='password' name='password'></Input>
+        <Button type='submit' className={style.register__button}>{isLoading ? "Loading..." : "Register"}</Button>
+      </form>
+    </AuthLayout>
   )
 }
 

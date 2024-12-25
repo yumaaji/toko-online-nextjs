@@ -5,34 +5,8 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  &__title{
-    font-size: 32px;
-    margin-bottom: 10px;
-  }
-  &__form{
-    width: 30%;
-    padding: 20px;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-    @media (max-width: 1024px) {
-      width: 60%;
-    }
-    @media (max-width: 768px) {
-      width: 80%;
-    }
-    &__button{
-      width: 100%;
-      margin-bottom: 50px;
-    }
-    &__link{
-      text-align: center;
-      a{
-        color: #23bebe;
-      }
-    }
-  }
-  &__error{
-    color: red;
-    margin-bottom: 5px;
+  &__button{
+    width: 100%;
+    margin-bottom: 50px;
   }
 }
