@@ -1,0 +1,44 @@
+.sidebar{
+  background-color: black;
+  color: white;
+  padding: 20px;
+  width: 250px;
+  height: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__top{
+    &__title{
+      margin-bottom: 40px;
+    }
+    &__lists{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      &__items{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 5px;
+        padding: 5px;
+        &__icon{
+          font-size: 32px;
+        }
+        &:hover{
+          background-color: white;
+          color : black;
+          transition: 0.3s;
+        }
+        &__active{
+          background-color: white;
+          color : black;
+        }
+      }
+    }
+  }
+  &__bottom{
+    &__button{
+      width: 100%;
+    }
+  }
+}
