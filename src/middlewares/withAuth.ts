@@ -7,6 +7,7 @@ const authPage = ['auth']
 export default function withAuth(middleware: NextMiddleware, requireAuth: string[] = []) {
   return async (req: NextRequest, event: NextFetchEvent) => {
 
+    //pathname
     const pathname = req.nextUrl.pathname.split('/')[1]
     
     if(requireAuth.includes(pathname)){
