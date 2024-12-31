@@ -1,4 +1,5 @@
 import Adminlayout from "@/components/layouts/AdminLayout"
+
 const DashboardAdminView = () => {
   return (
     <Adminlayout>

@@ -1,6 +1,7 @@
-import {addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where} from 'firebase/firestore'
+import {addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where, deleteDoc} from 'firebase/firestore'
 import firebaseApp from './init'
 import bcrypt from 'bcrypt'
+// import { deleteData } from '@/lib/firebase/service';
 
 const firestore = getFirestore(firebaseApp)
 
@@ -34,6 +35,26 @@ export async function addData(collectionName: string, data:any, callback: Functi
   .then(() => {
     callback(true)
   }).catch((error) => {
+    callback(false)
+  })
+}
+
+export async function updateData(collectionName: string, id:string, data:any, callback:Function){
+  const docRef = doc(firestore, collectionName, id)
+  await updateDoc(docRef, data)
+  .then(() => {
+    callback(true)
+  }).catch(()=>{
+    callback(false)
+  })
+}
+
+export async function deleteData(collectionName: string, id:string, callback:Function){
+  const docRef = doc(firestore, collectionName, id)
+  await deleteDoc(docRef)
+  .then(() => {
+    callback(true)
+  }).catch(()=>{
     callback(false)
   })
 }

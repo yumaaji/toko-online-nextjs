@@ -1,8 +1,8 @@
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import style from './Sidebar.module.scss'
-import { useRouter } from 'next/router'
 import Button from '@/components/ui/Button/Index'
-import { signOut } from 'next-auth/react'
 
 type Propstype = {
   lists: Array<{name: string, link: string, icon: string}>
@@ -14,7 +14,7 @@ const Sidebar = (props: Propstype) => {
   return (
     <div className={style.sidebar}>
       <div className={style.sidebar__top}>
-        <h1 className={style.sidebar__top__title}>Sidebar</h1>
+        <h1 className={style.sidebar__top__title}>Admin Panel</h1>
         <div className={style.sidebar__top__lists}>
           {lists.map((list, index) => (
             <Link href={list.link} key={list.name} className={`${style.sidebar__top__lists__items} ${pathname === list.link && style.sidebar__top__lists__items__active}`}>

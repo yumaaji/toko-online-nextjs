@@ -50,7 +50,7 @@ const RegisterView = () => {
     <AuthLayout error={error} title="Register" linkText="Already have an account, sign in " link="/auth/login">
       <form onSubmit={handleSubmit}>
         <Input label='Email' type='email' name='email'></Input>
-        <Input label='Fullname' type='email' name='fullname'></Input>
+        <Input label='Fullname' type='text' name='fullname'></Input>
         <Input label='Phone' type='text' name='phone'></Input>
         <Input label='Password' type='password' name='password'></Input>
         <Button type='submit' className={style.register__button}>{isLoading ? "Loading..." : "Register"}</Button>
