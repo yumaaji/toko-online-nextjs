@@ -1,4 +1,4 @@
-import style from './AuthLayout.module.scss'
+import style from './Authlayout.module.scss'
 import Link from "next/link";
 
 type Propstype = {
