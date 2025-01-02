@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { signIn, loginWithGoogle } from "@/services/auth/services";
 import { compare } from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const AuthOptions: NextAuthOptions ={
   session: {
@@ -73,6 +74,13 @@ const AuthOptions: NextAuthOptions ={
       if('phone' in token){
         session.user.phone = token.phone
       }
+
+      const accessToken = jwt.sign(token, process.env.NEXTAUTH_SECRET || '', {
+        algorithm: "HS256",
+      })
+
+      session.accessToken = accessToken
+
       return session
     }
   },
